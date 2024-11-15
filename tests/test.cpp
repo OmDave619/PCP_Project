@@ -40,6 +40,8 @@ int main() {
     std::vector<Point> points = makeTest(numPoints);
     MeshMethod meshMerge(16,4);
     std::vector<Point> hull = meshMerge.computeHull(points);
+    // TreeMerge treeMerge;
+    // std::vector<Point> hull = treeMerge.ConvexHull(points, 16);
     FILE *fp;
     fp = fopen("./tests/input.txt", "w");
     for (int i = 0; i < numPoints; ++i) {

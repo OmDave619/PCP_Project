@@ -98,6 +98,6 @@ vector<Point> MeshMethod::computeHull(std::vector<Point>& points) {
     for (size_t i = 1; i < intermediateHulls.size(); ++i) {
         finalHull = pch.mergeHulls(finalHull, intermediateHulls[i]);
     }
-
+    
     return finalHull;
 }

@@ -32,9 +32,10 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	@rm -rf $(BIN_DIR) $(OBJ_DIR)
+	rm -rf $(BIN_DIR) $(OBJ_DIR)
 
 tests: $(BIN_DIR)/$(TEST_TARGET1) $(BIN_DIR)/$(TEST_TARGET2)
 	@echo Running tests...
-	@./$(BIN_DIR)/$(TEST_TARGET1)
-	@./$(BIN_DIR)/$(TEST_TARGET2)
+	./$(BIN_DIR)/$(TEST_TARGET2)
+	./$(BIN_DIR)/$(TEST_TARGET1)
+	@cd $(TEST_DIR) && python3 script.py

@@ -36,17 +36,18 @@ std::vector<Point> runGrahamScan(std::vector<Point>& points) {
 }
 
 int main() {
-    int numPoints = 1000;
+    int numPoints = 100;
     std::vector<Point> points = makeTest(numPoints);
-    MeshMethod meshMerge(16,4);
-    std::vector<Point> hull = meshMerge.computeHull(points);
-    // TreeMerge treeMerge;
-    // std::vector<Point> hull = treeMerge.ConvexHull(points, 16);
     FILE *fp;
     fp = fopen("./tests/input.txt", "w");
     for (int i = 0; i < numPoints; ++i) {
         fprintf(fp, "%lf %lf\n", points[i].x, points[i].y);
     }
+    // MeshMethod meshMerge(16,4);
+    // std::vector<Point> hull = meshMerge.computeHull(points);
+    // TreeMerge treeMerge;
+    // std::vector<Point> hull = treeMerge.ConvexHull(points, 16);
+    std::vector<Point> hull = runGrahamScan(points);
     fp = fopen("./tests/output.txt", "w");
     for (int i = 0; i < hull.size(); ++i) {
         fprintf(fp, "%lf %lf\n", hull[i].x, hull[i].y);

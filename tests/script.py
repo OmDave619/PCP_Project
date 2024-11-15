@@ -13,6 +13,7 @@ with open('output.txt', 'r') as f:
     for line in f:
         x, y = map(float, line.split())
         output_points.append((x, y))
+output_points.append(output_points[0])
 
 # Extract x and y coordinates
 input_x, input_y = zip(*input_points)
@@ -27,6 +28,9 @@ plt.xlabel('X')
 plt.ylabel('Y')
 plt.title('Scatter Plot of Input Points and Connected Output Points')
 plt.legend()
+
+# Set equal scales for both axes
+plt.axis('equal')
 
 # Show the plot
 plt.grid(True)

@@ -3,10 +3,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define MAX_Y 1000
-#define MAX_X 1000
-#define MIN_Y -1000
-#define MIN_X -1000
+#define MAX_Y 5
+#define MAX_X 10
+#define MIN_Y 0
+#define MIN_X 5
 
 // make test
 std::vector<Point> makeTest(int numPoints) {
@@ -33,7 +33,7 @@ std::vector<Point> runGrahamScan(std::vector<Point>& points) {
 }
 
 int main() {
-    int numPoints = 1000;
+    int numPoints = 10;
     std::vector<Point> points = makeTest(numPoints);
     std::vector<Point> hull = runGrahamScan(points);
     FILE *fp;

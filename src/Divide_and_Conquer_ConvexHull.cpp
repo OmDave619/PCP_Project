@@ -1,10 +1,10 @@
-#include "ParallelConvexHull.hpp"
+#include "Divide_and_Conquer_ConvexHull.hpp"
 #include <algorithm>
 #include <cmath>
 
-ParallelConvexHull::ParallelConvexHull(int NumThreads) : NumThreads(NumThreads) {}
+DnQ_ConvexHull::DnQ_ConvexHull(int NumThreads) : NumThreads(NumThreads) {}
 
-std::vector<std::vector<Point>> ParallelConvexHull::partitionPoints(std::vector<Point>& points) {
+std::vector<std::vector<Point>> DnQ_ConvexHull::partitionPoints(std::vector<Point>& points) {
     int chunkSize = std::ceil(points.size() / static_cast<double>(NumThreads));
     std::vector<std::vector<Point>> partitions(NumThreads);
     
@@ -17,7 +17,7 @@ std::vector<std::vector<Point>> ParallelConvexHull::partitionPoints(std::vector<
     return partitions;
 }
 
-std::vector<Point> ParallelConvexHull::mergeHulls(std::vector<Point>& left, std::vector<Point>& right) {
+std::vector<Point> DnQ_ConvexHull::mergeHulls(std::vector<Point>& left, std::vector<Point>& right) {
     // Placeholder implementation for merging two convex hulls
     // Implement the merging logic according to the method of finding upper and lower tangents
 
@@ -94,7 +94,7 @@ std::vector<Point> ParallelConvexHull::mergeHulls(std::vector<Point>& left, std:
     return mergedHull; 
 }
 
-int ParallelConvexHull::orientation(Point p, Point q, Point r) {   
+int DnQ_ConvexHull::orientation(Point p, Point q, Point r) {   
     int det = (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y);
     if(det == 0) return 0;   // Collinear
     if(det > 0) return 1;   // Counter-clockwise

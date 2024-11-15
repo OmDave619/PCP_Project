@@ -1,7 +1,7 @@
-#include "point.hpp"
-#include <vector>
+// #include "point.hpp"
+// #include <vector>
 
-class TreeMerge {
-public:
-    std::vector<Point> ConvexHull(std::vector<Point>& points, int n);
-};
+// class TreeMerge {
+// public:
+//     std::vector<Point> ConvexHull(std::vector<Point>& points, int n);
+// };

@@ -1,14 +1,15 @@
 #include "GrahamScan.hpp"
 #include "point.hpp"
 #include "TreeMerge.hpp"
+#include "MeshMethod.hpp"
 
 #include <bits/stdc++.h>
 using namespace std;
 
-#define MAX_Y 5
-#define MAX_X 10
-#define MIN_Y 0
-#define MIN_X 5
+#define MAX_Y 100000
+#define MAX_X 100000
+#define MIN_Y -100000
+#define MIN_X -100000
 
 // make test
 std::vector<Point> makeTest(int numPoints) {
@@ -35,10 +36,10 @@ std::vector<Point> runGrahamScan(std::vector<Point>& points) {
 }
 
 int main() {
-    int numPoints = 10;
+    int numPoints = 1000;
     std::vector<Point> points = makeTest(numPoints);
-    TreeMerge treeMerge;
-    std::vector<Point> hull = treeMerge.ConvexHull(points, numPoints);
+    MeshMethod meshMerge(16,4);
+    std::vector<Point> hull = meshMerge.computeHull(points);
     FILE *fp;
     fp = fopen("./tests/input.txt", "w");
     for (int i = 0; i < numPoints; ++i) {

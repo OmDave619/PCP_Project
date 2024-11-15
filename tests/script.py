@@ -30,7 +30,7 @@ plt.title('Scatter Plot of Input Points and Connected Output Points')
 plt.legend()
 
 # Set equal scales for both axes
-plt.axis('equal')
+# plt.axis('equal')
 
 # Show the plot
 plt.grid(True)

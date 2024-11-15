@@ -86,9 +86,3 @@ int GrahamScan::orientation(Point p, Point q, Point r) {
     if (val == 0) return 0;            // collinear
     return (val > 0) ? 1 : 2;          // clockwise or counterclockwise
 }
-
-int main()
-{
-    std::cout << "ok" << std::endl;
-    return 0;
-}

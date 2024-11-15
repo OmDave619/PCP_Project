@@ -7,4 +7,5 @@ class Point {
     Point(double x=0.0, double y=0.0);
     bool operator==(const Point& other) const;
     bool operator<(const Point& other) const;
+    double operator() (const Point& other) const;
 };

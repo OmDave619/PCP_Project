@@ -7,5 +7,5 @@ public:
     std::vector<Point> computeHull(std::vector<Point>& points) override;
 private:
     void sortPoints(std::vector<Point>& points);
-    bool isCounterClockwise(const Point& p1, const Point& p2, const Point& p3);
+    int orientation(Point p, Point q, Point r);
 };

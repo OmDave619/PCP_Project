@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <stack>
 
-bool compare(Point p1, Point p2, Point pivot) {
+bool GrahamScan::compare(Point p1, Point p2, Point pivot) {
     int o = orientation(pivot, p1, p2);
     if (o == 0)
         return p1(pivot) < p2(pivot); // Keep the closer point
@@ -77,10 +77,10 @@ std::vector<Point> GrahamScan::computeHull(std::vector<Point>& points) {
 // assumes 1st point in pivot
 void GrahamScan::sortPoints(std::vector<Point>& points) {
     Point pivot = points[0];
-    std::sort(points.begin() + 1, points.end(), [pivot](Point p1, Point p2) { return compare(p1, p2, pivot); });
+    std::sort(points.begin() + 1, points.end(), [this, pivot](Point p1, Point p2) { return this->compare(p1, p2, pivot); });
 }
 
-int orientation(Point p, Point q, Point r) {
+int GrahamScan::orientation(Point p, Point q, Point r) {
     int val = (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y);
     if (val == 0) return 0;            // collinear
     return (val > 0) ? 1 : 2;          // clockwise or counterclockwise

@@ -1,5 +1,5 @@
 #pragma once
-#include "point.hpp"
+#include "../include/point.hpp"
 #include <vector>
 
 class ConvexHull {

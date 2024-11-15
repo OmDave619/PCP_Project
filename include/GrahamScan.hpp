@@ -1,5 +1,5 @@
 #pragma once
-#include "ConvexHull.hpp"
+#include "../include/ConvexHull.hpp"
 #include <algorithm>
 
 class GrahamScan : public ConvexHull {
@@ -8,4 +8,5 @@ public:
 private:
     void sortPoints(std::vector<Point>& points);
     int orientation(Point p, Point q, Point r);
+    bool compare(Point p1, Point p2, Point pivot);
 };

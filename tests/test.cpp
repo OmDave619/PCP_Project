@@ -37,11 +37,11 @@ int main() {
     std::vector<Point> points = makeTest(numPoints);
     std::vector<Point> hull = runGrahamScan(points);
     FILE *fp;
-    fp = fopen("./input.txt", "w");
+    fp = fopen("./tests/input.txt", "w");
     for (int i = 0; i < numPoints; ++i) {
         fprintf(fp, "%lf %lf\n", points[i].x, points[i].y);
     }
-    fp = fopen("./output.txt", "w");
+    fp = fopen("./tests/output.txt", "w");
     for (int i = 0; i < hull.size(); ++i) {
         fprintf(fp, "%lf %lf\n", hull[i].x, hull[i].y);
     }

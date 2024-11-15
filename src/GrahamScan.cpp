@@ -1,4 +1,4 @@
-#include "../include/GrahamScan.hpp"
+#include "GrahamScan.hpp"
 #include <algorithm>
 #include <stack>
 #include <iostream>

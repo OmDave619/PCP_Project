@@ -1,7 +1,7 @@
 #pragma once 
 #include <vector>   
-#include "../include/point.hpp"
-#include "../include/ConvexHull.hpp"
+#include "point.hpp"
+#include "ConvexHull.hpp"
 
 class ParallelConvexHull : public ConvexHull {
     public:

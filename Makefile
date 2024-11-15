@@ -19,11 +19,11 @@ TEST_SRC2 := $(TEST_DIR)/test_merge.cpp
 
 all: $(BIN_DIR)/$(TEST_TARGET1) $(BIN_DIR)/$(TEST_TARGET2)
 
-$(BIN_DIR)/$(TEST_TARGET1): $(TEST_SRC1) $(OBJS)
+$(BIN_DIR)/$(TEST_TARGET1): $(TEST_SRC1) $(OBJS) $(OBJ_DIR)/TreeMerge.o
 	@mkdir -p $(BIN_DIR)
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
-$(BIN_DIR)/$(TEST_TARGET2): $(TEST_SRC2) $(OBJS)
+$(BIN_DIR)/$(TEST_TARGET2): $(TEST_SRC2) $(OBJS) $(OBJ_DIR)/TreeMerge.o
 	@mkdir -p $(BIN_DIR)
 	$(CXX) $(CXXFLAGS) -o $@ $^
 

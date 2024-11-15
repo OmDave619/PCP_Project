@@ -1,5 +1,5 @@
 #pragma once
-#include "../include/ConvexHull.hpp"
+#include "ConvexHull.hpp"
 #include <algorithm>
 
 class GrahamScan : public ConvexHull {

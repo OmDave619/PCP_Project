@@ -1,5 +1,7 @@
 #include "GrahamScan.hpp"
 #include "point.hpp"
+#include "TreeMerge.hpp"
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -35,7 +37,8 @@ std::vector<Point> runGrahamScan(std::vector<Point>& points) {
 int main() {
     int numPoints = 10;
     std::vector<Point> points = makeTest(numPoints);
-    std::vector<Point> hull = runGrahamScan(points);
+    TreeMerge treeMerge;
+    std::vector<Point> hull = treeMerge.ConvexHull(points, numPoints);
     FILE *fp;
     fp = fopen("./tests/input.txt", "w");
     for (int i = 0; i < numPoints; ++i) {

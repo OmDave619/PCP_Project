@@ -10,7 +10,7 @@ bool GrahamScan::compare(Point p1, Point p2, Point pivot) {
     return o == 2; // Counterclockwise points come first
 }
 
-std::vector<Point> GrahamScan::computeHull(std::vector<Point>& points) {
+std::vector<Point> GrahamScan::computeHull(std::vector<Point> points) {
     int n = points.size();
 
     // to decide

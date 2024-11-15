@@ -1,4 +1,5 @@
 #include "Divide_and_Conquer_ConvexHull.hpp"
+#include <iostream>
 #include <algorithm>
 #include <cmath>
 
@@ -17,86 +18,86 @@ std::vector<std::vector<Point>> DnQ_ConvexHull::partitionPoints(std::vector<Poin
     return partitions;
 }
 
-std::vector<Point> DnQ_ConvexHull::mergeHulls(std::vector<Point>& left, std::vector<Point>& right) {
-    // Placeholder implementation for merging two convex hulls
-    // Implement the merging logic according to the method of finding upper and lower tangents
-
+std::vector<Point> DnQ_ConvexHull::mergeHulls(const std::vector<Point>& left, const std::vector<Point>& right) {
     int n_left = left.size();
     int n_right = right.size();
 
-    //finding the righmost point in left hull
-    Point rightMost = left[0];
+    // Find the rightmost point in left hull
     int indl = 0;
     for(int i = 1; i < n_left; i++) {
-        if(left[i].x > rightMost.x) {
-            rightMost = left[i];
+        if(left[i].x > left[indl].x) {
             indl = i;
         }
     }
 
-    //finding the leftmost point in right hull
-    Point leftMost = right[0];
+    // Find the leftmost point in right hull
     int indr = 0;
     for(int i = 1; i < n_right; i++) {
-        if(right[i].x < leftMost.x) {
-            leftMost = right[i];
+        if(right[i].x < right[indr].x) {
             indr = i;
         }
     }
 
-    //finding the upper tangent 
-    Point p1 = rightMost, p2 = leftMost;
-    int ind1 = indl, ind2 = indr;   //ind1 iterates in left hull and ind2 iterates in right hull
+    // Find the upper tangent
+    int upper_indl = indl;
+    int upper_indr = indr;
     bool done = false;
     while(!done) {
         done = true;
-        while(orientation(right[ind2], left[ind1], left[(ind1 + 1) % n_left]) == 1) {   //counter clockwise orientation
-            ind1 = (ind1 + 1) % n_left;
+        // Move upper_indl forward while the orientation indicates a counter-clockwise turn
+        while(orientation(right[upper_indr], left[upper_indl], left[(upper_indl + 1) % n_left]) >= 0) {
+            upper_indl = (upper_indl + 1) % n_left;
         }
-
-        while(orientation(left[ind1], right[ind2], right[(ind2 - 1 + n_right) % right.size()]) == -1) { //clockwise orientation
-            ind2 = (ind2 - 1 + n_right) % n_right;
+        // Move upper_indr backward while the orientation indicates a clockwise turn
+        while(orientation(left[upper_indl], right[upper_indr], right[(upper_indr - 1 + n_right) % n_right]) <= 0) {
+            upper_indr = (upper_indr - 1 + n_right) % n_right;
             done = false;
         }
     }
-    int upper_indl = ind1, upper_indr = ind2;
 
-    //finding the lower tangent
+    // Find the lower tangent
+    int lower_indl = indl;
+    int lower_indr = indr;
     done = false;
-    ind1 = indl, ind2 = indr;
     while(!done) {
         done = true;
-        while(orientation(left[ind1], right[ind2], right[(ind2 + 1) % n_right]) == -1) { //clockwise orientation
-            ind2 = (ind2 + 1) % n_right;
+        // Move lower_indr forward while the orientation indicates a clockwise turn
+        while(orientation(left[lower_indl], right[lower_indr], right[(lower_indr + 1) % n_right]) >= 0) {
+            lower_indr = (lower_indr + 1) % n_right;
         }
-
-        while(orientation(right[ind2], left[ind1], left[(ind1 - 1 + n_left) % n_left]) == 1) {   //counter clockwise orientation
-            ind1 = (ind1 - 1 + n_left) % n_left;
+        // Move lower_indl backward while the orientation indicates a counter-clockwise turn
+        while(orientation(right[lower_indr], left[lower_indl], left[(lower_indl - 1 + n_left) % n_left]) <= 0) {
+            lower_indl = (lower_indl - 1 + n_left) % n_left;
             done = false;
         }
     }
-    int lower_indl = ind1, lower_indr = ind2;
 
-    //merging the two hulls
+    // Merge the hulls
     std::vector<Point> mergedHull;
+
+    // Traverse the left hull from upper_indl to lower_indl (inclusive)
     int ind = upper_indl;
+    mergedHull.emplace_back(left[ind]);
     while(ind != lower_indl) {
-        mergedHull.emplace_back(left[ind]);
         ind = (ind + 1) % n_left;
+        mergedHull.emplace_back(left[ind]);
     }
 
+    // Traverse the right hull from lower_indr to upper_indr (inclusive)
     ind = lower_indr;
+    mergedHull.emplace_back(right[ind]);
     while(ind != upper_indr) {
-        mergedHull.emplace_back(right[ind]);
         ind = (ind + 1) % n_right;
+        mergedHull.emplace_back(right[ind]);
     }
 
-    return mergedHull; 
+    return mergedHull;
 }
 
-int DnQ_ConvexHull::orientation(Point p, Point q, Point r) {   
-    int det = (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y);
+int DnQ_ConvexHull::orientation(const Point& a, const Point& b, const Point& c) {   
+    // long det = static_cast<long>(q.x - p.x) * (r.y - p.y) - static_cast<long>(q.y - p.y) * (r.x - p.x);
+    long det = static_cast<long>(c.x - b.x) * (b.y - a.y) - static_cast<long>(c.y - b.y) * (b.x - a.x);
     if(det == 0) return 0;   // Collinear
-    if(det > 0) return 1;   // Counter-clockwise
-    else return -1;         // Clockwise
+    if(det > 0) return 1;    // Counter-clockwise
+    else return -1;          // Clockwise
 }

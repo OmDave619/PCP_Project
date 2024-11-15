@@ -4,5 +4,5 @@
 
 class ConvexHull {
     public:
-        virtual std::vector<Point> computeHull(std::vector<Point> &points) = 0;
+        virtual std::vector<Point> computeHull(std::vector<Point> points) = 0;
 };
